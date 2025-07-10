@@ -35,6 +35,7 @@ jobs:
                   print('Page loaded and waited.')
               finally:
                   browser.close()
+          print("✅ Script completed successfully — Streamlit app pinged.")
           EOF
 
           python wake.py
