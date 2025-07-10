@@ -23,7 +23,7 @@ jobs:
 
       - name: Wake the App via Headless Browser
         run: |
-          python -c "
+          python <<EOF
 import time
 from playwright.sync_api import sync_playwright
 
@@ -35,4 +35,4 @@ with sync_playwright() as p:
     time.sleep(15)
     print('Page loaded and waited.')
     browser.close()
-"
+EOF
