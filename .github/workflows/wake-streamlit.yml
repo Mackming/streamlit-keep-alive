@@ -21,8 +21,6 @@ jobs:
           pip install playwright
           playwright install
 
-      - name: Wake the App via Headless Browser
-        run: |
           cat << 'EOF' > wake.py
           from playwright.sync_api import sync_playwright
           import time
@@ -38,4 +36,5 @@ jobs:
               finally:
                   browser.close()
           EOF
-                    python wake.py
+
+          python wake.py
