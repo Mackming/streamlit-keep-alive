@@ -23,15 +23,19 @@ jobs:
 
       - name: Wake the App via Headless Browser
         run: |
-          echo "from playwright.sync_api import sync_playwright
-import time
+          cat << 'EOF' > wake.py
+          from playwright.sync_api import sync_playwright
+          import time
 
-with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True)
-    page = browser.new_page()
-    print('Visiting app...')
-    page.goto('https://ai-caption-generator.streamlit.app/', wait_until='load')
-    time.sleep(15)
-    print('Page loaded and waited.')
-    browser.close()" > wake.py
-          python wake.py
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              try:
+                  page = browser.new_page()
+                  print('Visiting app...')
+                  page.goto('https://ai-caption-generator.streamlit.app/', wait_until='load')
+                  time.sleep(15)
+                  print('Page loaded and waited.')
+              finally:
+                  browser.close()
+          EOF
+                    python wake.py
